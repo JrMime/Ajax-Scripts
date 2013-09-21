@@ -174,7 +174,7 @@ function redirectMod() {
 
 function bdMod() {
     $('#advancedtools').closeModal();
-    $.showCustomModal("Batch delete", '<form class="WikiaForm" method="" name=""><fieldset><textarea id="abd-textarea" style="height: 20em;width: 500px;"></textarea><p><label for="abd-reason">Delete reason:</label><input id="abd-reason"style="width: 20em;" type="text"></p><p><input id="abd-startbutton" type="button" value="start" onclick="ajaxDeleteStart();"></p><pre style="border: solid 1px grey; width: 500px; height: 60px; overflow: scroll;" id="abd-output"></pre></feildset></form>', {
+    $.showCustomModal("Batch delete", '<form class="WikiaForm" method="" name=""><fieldset><textarea id="abd-textarea" style="height: 20em;width: 500px;"></textarea><p><label for="abd-reason">Delete reason:</label><input id="abd-reason"style="width: 20em;" type="text"></p><p><input id="abd-startbutton" type="button" value="start" onclick="ajaxDeleteStart2();"></p><pre style="border: solid 1px grey; width: 500px; height: 60px; overflow: scroll;" id="abd-output"></pre></feildset></form>', {
         id: "bd-modal",
         width: 650,
         buttons: [{
@@ -454,7 +454,7 @@ function ajaxUnsigned() {
 
 //Ajax Batch Delete
 
-function ajaxDeleteStart() {
+function ajaxDeleteStart2() {
     document.getElementById('abd-startbutton').setAttribute('disabled', 'disabled');
     var txt = document.getElementById('abd-textarea'),
         deletes = txt.value.split('\n'),
@@ -471,7 +471,7 @@ function ajaxDeleteStart() {
     } else {
         if (badchars.test(page)) {
             $('#abd-output').append('! Illegal characters detected, skipping:' + page + '\n');
-            setTimeout(ajaxDeleteStart, 1000);
+            setTimeout(ajaxDeleteStart2, 1000);
         } else {
             $('#abd-output').append('> Attempting to delete [[' + page + ']]\n');
             ajaxBatchDeleteAPage(page, reason);
@@ -491,7 +491,7 @@ function ajaxBatchDeleteAPage(title, deleteReason) {
         } else {
             $('#abd-output').append('  > Deleted\n');
         }
-        setTimeout(ajaxDeleteStart, 1000);
+        setTimeout(ajaxDeleteStart2, 1000);
     });
 }
 
